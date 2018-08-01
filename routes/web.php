@@ -16,10 +16,16 @@ Route::get('/', function () {
 });
 
 
+/*
 Route::get('contact', function () {
    echo "Je m'appele Youssef Imzoughene";
 });
+*/
 
+/*
+Route::get('contact','TestController@contact');
+*/
+Route::get('contact/{name}','TestController@contact');
 
 Route::get('profil/{name}/id/{id}', function ($name,$id) {
    echo "Je m'appele $name my id is $id";
