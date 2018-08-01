@@ -16,3 +16,12 @@ composer create-project laravel/laravel="5.4.*" myProject
 php artisan serve
 -------------------
 php artisan make:controller TestController
+--------------------
+php artisan make:migration create_contacts_table --create=contacts
+--------------
+php artisan migrate
+--------
+//$table->string('email')->index();
+//$table->string('email')->unique();
+-------
+
