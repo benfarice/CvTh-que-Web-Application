@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('contact', function () {
+   echo "Je m'appele Youssef Imzoughene";
+});
+
+
+Route::get('profil/{name}/id/{id}', function ($name,$id) {
+   echo "Je m'appele $name my id is $id";
+})->where(['name'=>'[a-zA-Z]+','id'=>'[0-9]+']);
