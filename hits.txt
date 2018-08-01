@@ -24,4 +24,7 @@ php artisan migrate
 //$table->string('email')->index();
 //$table->string('email')->unique();
 -------
-
+php artisan make:model Contact
+-------
+php artisan make:controller ContactController
+-----------
