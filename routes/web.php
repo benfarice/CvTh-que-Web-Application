@@ -37,6 +37,17 @@ Route::get('contact', function () {
 /*
 Route::get('contact','TestController@contact');
 */
+
+Route::get('cvs','CvController@index');
+Route::get('cvs/create','CvController@create');
+Route::post('cvs/create','CvController@store');
+Route::get('cvs/{id}/edit','CvController@edit');
+Route::post('cvs/{id}','CvController@update');
+Route::delete('cvs/{id}','CvController@destroy');
+
+
+
+
 Route::get('contact/{name}','TestController@contact');
 
 Route::get('newcontact','ContactController@newContact');

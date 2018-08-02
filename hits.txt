@@ -29,3 +29,11 @@ php artisan make:model Contact
 php artisan make:controller ContactController
 -----------
 php artisan make:auth
+---------
+php artisan make:migration create_cvs_table --create=cvs
+---------
+php artisan migrate
+------------
+php artisan make:model Cv
+----------
+php artisan make:controller CvController
