@@ -28,3 +28,4 @@ php artisan make:model Contact
 -------
 php artisan make:controller ContactController
 -----------
+php artisan make:auth
