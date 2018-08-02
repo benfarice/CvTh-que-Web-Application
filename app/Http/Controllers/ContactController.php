@@ -19,6 +19,7 @@ class ContactController extends Controller
 
     public function listContacts(){
     	$contacts_list = Contact::all();
-    	dd($contacts_list);
+    	//dd($contacts_list);
+        return view('contacts',['contacts'=>$contacts_list]);
     }
 }
