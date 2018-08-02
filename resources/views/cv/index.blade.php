@@ -25,7 +25,7 @@
 						<td>{{$cv->created_at}}</td>
 						<td>
 							<a href="" class="btn btn-primary">Details</a>
-							<a href="" class="btn btn-default">Editer</a>
+							<a href="{{url('cvs/'.$cv->id.'/edit')}}" class="btn btn-default">Editer</a>
 							<a href="" class="btn btn-danger">Supprimer</a>
 						</td>
 					</tr>
