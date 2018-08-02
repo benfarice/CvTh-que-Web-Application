@@ -8,7 +8,9 @@ class CvController extends Controller
 {
 	//Lister les cvs
     public function index(){
-
+        $listCvs = Cv::all();
+        return view('cv.index',
+            ['cvs'=>$listCvs]);
     }
     //Affiche le formulaire de creation de cv
     public function create(){
@@ -21,6 +23,7 @@ class CvController extends Controller
         $cv->titre = $request->input('titre');
          $cv->presentation = $request->input('presentation');
          $cv->save();
+         return redirect('cvs');
     	
     }
     //permet de récupérer un cv puis de le mettre dans le formulaire
