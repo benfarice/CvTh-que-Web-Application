@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cv;
+use Auth;
 
 use App\Http\Requests\cvRequest;
 
@@ -20,7 +21,9 @@ class CvController extends Controller
 
 	//Lister les cvs
     public function index(){
-        $listCvs = Cv::all();
+        //$listCvs = Cv::all();
+        //$listCvs = Cv::where('user_id',Auth::user()->id)->get();
+        $listCvs=Auth::user()->cvs;
         return view('cv.index',
             ['cvs'=>$listCvs]);
     }
@@ -34,6 +37,7 @@ class CvController extends Controller
         $cv = new Cv();
         $cv->titre = $request->input('titre');
          $cv->presentation = $request->input('presentation');
+         $cv->user_id=Auth::user()->id;
          $cv->save();
 
 

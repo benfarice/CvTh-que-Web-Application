@@ -25,7 +25,10 @@
 				<tbody>
 					@foreach($cvs as $cv)
 					<tr>
-						<td>{{$cv->titre}}</td>
+						<td>{{$cv->titre}}
+						<br>
+						{{$cv->user->name}}
+						</td>
 						<td>{{$cv->presentation}}</td>
 						<td>{{$cv->created_at}}</td>
 						<td>
