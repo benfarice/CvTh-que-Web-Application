@@ -9,6 +9,15 @@ use App\Http\Requests\cvRequest;
 
 class CvController extends Controller
 {
+
+    public function __construct(){
+         $this->middleware('auth');
+    }
+
+
+
+
+
 	//Lister les cvs
     public function index(){
         $listCvs = Cv::all();
