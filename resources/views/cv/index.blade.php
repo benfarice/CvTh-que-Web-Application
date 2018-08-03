@@ -4,11 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			@if(session()->has('success'))
-			<div class="alert alert-success">
-				{{ session()->get('success') }}
-			</div>
-			@endif
+			@include('partials.flash')
 			<h1>La liste de mes CVs</h1>
 			<div class="pull-right">
 				<a class="btn btn-success" href="{{ url('cvs/create')}}">Nouveau cv</a>
