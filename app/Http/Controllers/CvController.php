@@ -26,6 +26,10 @@ class CvController extends Controller
         $cv->titre = $request->input('titre');
          $cv->presentation = $request->input('presentation');
          $cv->save();
+
+
+         session()->flash('success','Le cv à été bien enregistré !!');
+
          return redirect('cvs');
     	
     }
