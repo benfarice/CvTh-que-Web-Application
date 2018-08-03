@@ -3,6 +3,17 @@
 
 @section('content')
 <div class="container">
+	@if(count($errors))
+	<div class="alert alert-danger" role="alert">
+		<ul>
+			@foreach($errors->all() as $e)
+			<li>
+				{{$e}}
+			</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
 	<div class="row">
 		<div class="col-md-12">
 			<form action="{{ url('cvs/'.$cv->id) }}" method="post">

@@ -41,3 +41,5 @@ php artisan make:controller CvController
 php artisan make:migration add_column_deleted_at_cvs --table=cvs
 ---------------
 php artisan migrate
+----------------
+php artisan make:request cvRequest
