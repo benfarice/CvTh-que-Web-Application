@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+
 use App\Cv;
 use Auth;
 
@@ -36,9 +38,19 @@ class CvController extends Controller
         //return $request->all();
         $cv = new Cv();
         $cv->titre = $request->input('titre');
-         $cv->presentation = $request->input('presentation');
-         $cv->user_id=Auth::user()->id;
-         $cv->save();
+        $cv->presentation = $request->input('presentation');
+        $cv->user_id=Auth::user()->id;
+       
+
+        if($request->hasfile('photo')){
+             $cv->photo = $request->photo->store('image');
+
+        }
+
+
+        
+
+        $cv->save();
 
 
          session()->flash('success','Le cv à été bien enregistré !!');
@@ -56,6 +68,10 @@ class CvController extends Controller
     	 $cv = Cv::find($id);
          $cv->titre = $request->input('titre');
          $cv->presentation = $request->input('presentation');
+         if($request->hasfile('photo')){
+             $cv->photo = $request->photo->store('image');
+
+         }
          $cv->save();
          return redirect('cvs');
     }

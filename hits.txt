@@ -46,3 +46,8 @@ php artisan make:request cvRequest
 -----------------
 php artisan make:migration add_column_user_id_cvs --table=cvs
 ------------
+php artisan make:migration add_column_photo_cvs --table=cvs
+------------
+php artisan migrate
+------
+php artisan storage:link

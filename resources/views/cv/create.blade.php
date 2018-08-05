@@ -21,7 +21,8 @@
 	-@endif-->
 	<div class="row">
 		<div class="col-md-12">
-			<form action="{{ url('cvs') }}" method="post">
+			<form action="{{ url('cvs') }}" 
+			method="post"  enctype="multipart/form-data" >
 				{!! csrf_field() !!}
 				<div class="form-group 
 				@if($errors->get('titre'))
@@ -57,7 +58,10 @@
 					</ul>
 					@endif
 				</div>
-				
+				<div class="form-group">
+					<label>Image</label>
+					<input type="file" class="form-control" name="photo">
+				</div>
 				<div class="form-group">
 					
 					<input type="submit"  class="form-control btn btn-primary" value="Enregistrer">

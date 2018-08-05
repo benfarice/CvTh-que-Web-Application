@@ -44,6 +44,28 @@
 				</tbody>
 
 			</table>
+			<div class="row">
+				@foreach($cvs as $cv)
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img src="{{url('storage/'.$cv->photo)}}" alt="">
+						<div class="caption">
+							<h3>{{$cv->titre}}</h3>
+							<p> {{$cv->presentation}}</p>
+							<p>
+							<form action="{{ url('cvs/'.$cv->id)}}" method="post">
+							{{csrf_field()}}
+							{{ method_field('DELETE')}}
+							<a href="" class="btn btn-primary">Details</a>
+							<a href="{{url('cvs/'.$cv->id.'/edit')}}" class="btn btn-default">Editer</a>
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+							</form>
+							</p>
+						</div>
+					</div>
+				</div>
+				@endforeach
+			</div>
 		</div>
 	</div>
 </div>
