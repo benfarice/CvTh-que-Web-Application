@@ -25,7 +25,17 @@ class CvController extends Controller
     public function index(){
         //$listCvs = Cv::all();
         //$listCvs = Cv::where('user_id',Auth::user()->id)->get();
-        $listCvs=Auth::user()->cvs;
+
+        if(Auth::user()->is_admin){
+            $listCvs = Cv::all();
+        }else{
+            $listCvs=Auth::user()->cvs;
+
+        }
+
+
+
+        //$listCvs=Auth::user()->cvs;
         return view('cv.index',
             ['cvs'=>$listCvs]);
     }
@@ -82,6 +92,7 @@ class CvController extends Controller
     public function destroy(Request $request,$id){
     	//return $request->all();
         $cv = Cv::find($id);
+        $this->authorize('delete',$cv);
         $cv->delete();
         return redirect('cvs');
     }

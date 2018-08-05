@@ -10,6 +10,15 @@ class CvPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user,$ability){
+        if($user->is_admin and $ability != 'delete'){
+            return true;
+        }
+    }
+
+
+
+
     /**
      * Determine whether the user can view the cv.
      *
@@ -17,6 +26,12 @@ class CvPolicy
      * @param  \App\Cv  $cv
      * @return mixed
      */
+
+
+
+
+
+
     public function view(User $user, Cv $cv)
     {
         return true;

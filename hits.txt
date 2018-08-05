@@ -55,3 +55,7 @@ php artisan storage:link
 php artisan route:list
 -----
 php artisan make:policy CvPolicy --model=Cv
+---
+php artisan make:migration add_column_is_admin_users --table=users
+----
+php artisan migrate
