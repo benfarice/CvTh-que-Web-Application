@@ -82,4 +82,8 @@ class CvController extends Controller
         $cv->delete();
         return redirect('cvs');
     }
+
+    public function show($id){
+        return "salam youssef";
+    }
 }
