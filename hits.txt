@@ -53,3 +53,5 @@ php artisan migrate
 php artisan storage:link
 -----------
 php artisan route:list
+-----
+php artisan make:policy CvPolicy --model=Cv

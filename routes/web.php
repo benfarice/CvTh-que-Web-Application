@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
+
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 
 Route::get('accueil', function () {
     return view('accueil');
@@ -61,9 +61,9 @@ Route::get('profil/{name}/id/{id}', function ($name,$id) {
    echo "Je m'appele $name my id is $id";
 })->where(['name'=>'[a-zA-Z]+','id'=>'[0-9]+']);
 */
-/*
+
 Auth::routes();
-*/
+
 /*
 Route::get('/home', 'HomeController@index')->name('home');
 */
