@@ -14,6 +14,7 @@ class CvPolicy
         if($user->is_admin and $ability != 'delete'){
             return true;
         }
+
     }
 
 
@@ -58,6 +59,7 @@ class CvPolicy
     public function update(User $user, Cv $cv)
     {
         return $user->id === $cv->user_id;
+        //return false;
     }
 
     /**

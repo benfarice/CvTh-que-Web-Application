@@ -9,7 +9,7 @@
 			<div class="pull-right">
 				<a class="btn btn-success" href="{{ url('cvs/create')}}">Nouveau cv</a>
 			</div>
-			<table class="table">
+			<!--<table class="table">
 				<thead>
 					<tr>
 						<th>Titre</th>
@@ -21,19 +21,19 @@
 				<tbody>
 					@foreach($cvs as $cv)
 					<tr>
-						<td>{{$cv->titre}}
+						<td>{-{$cv->titre}}
 						<br>
-						{{$cv->user->name}}
+						{-{$cv->user->name}}
 						</td>
-						<td>{{$cv->presentation}}</td>
-						<td>{{$cv->created_at}}</td>
+						<td>{-{$cv->presentation}}</td>
+						<td>{-{$cv->created_at}}</td>
 						<td>
 							
-							<form action="{{ url('cvs/'.$cv->id)}}" method="post">
-							{{csrf_field()}}
-							{{ method_field('DELETE')}}
+							<form action="{-{ url('cvs/'.$cv->id)}}" method="post">
+							{-{csrf_field()}}
+							{-{ method_field('DELETE')}}
 							<a href="" class="btn btn-primary">Details</a>
-							<a href="{{url('cvs/'.$cv->id.'/edit')}}" class="btn btn-default">Editer</a>
+							<a href="{-{url('cvs/'.$cv->id.'/edit')}}" class="btn btn-default">Editer</a>
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 							</form>
 
@@ -43,7 +43,7 @@
 					@endforeach
 				</tbody>
 
-			</table>
+			</table>-->
 			<div class="row">
 				@foreach($cvs as $cv)
 				<div class="col-sm-6 col-md-4">
@@ -57,8 +57,16 @@
 							{{csrf_field()}}
 							{{ method_field('DELETE')}}
 							<a href="" class="btn btn-primary">Details</a>
+
+
+							@can('update',$cv)
 							<a href="{{url('cvs/'.$cv->id.'/edit')}}" class="btn btn-default">Editer</a>
+							@endcan
+
+							@can('delete',$cv)
 							<button type="submit" class="btn btn-danger">Supprimer</button>
+							@endcan
+
 							</form>
 							</p>
 						</div>
