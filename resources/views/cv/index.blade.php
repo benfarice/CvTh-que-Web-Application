@@ -56,7 +56,7 @@
 							<form action="{{ url('cvs/'.$cv->id)}}" method="post">
 							{{csrf_field()}}
 							{{ method_field('DELETE')}}
-							<a href="" class="btn btn-primary">Details</a>
+							<a href="{{url('cvs/'.$cv->id)}}" class="btn btn-primary">Details</a>
 
 
 							@can('update',$cv)

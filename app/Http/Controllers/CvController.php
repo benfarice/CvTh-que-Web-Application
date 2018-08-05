@@ -98,6 +98,6 @@ class CvController extends Controller
     }
 
     public function show($id){
-        return "salam youssef";
+        return view('cv.show',['id'=>$id]);
     }
 }
