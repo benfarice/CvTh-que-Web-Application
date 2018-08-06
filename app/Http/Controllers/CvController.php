@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 use App\Cv;
+use App\Experience;
+
 use Auth;
 
 use App\Http\Requests\cvRequest;
@@ -99,6 +101,27 @@ class CvController extends Controller
 
     public function show($id){
         return view('cv.show',['id'=>$id]);
+    }
+
+    public function getexperiences($id){
+        $cv =  Cv::find($id);
+        return $cv->experiences;  
+    }
+
+    public function addexperience(Request $request){
+        $experience = new Experience;
+        $experience->titre = $request->titre;
+        $experience->body  = $request->body;
+        $experience->debut = $request->debut;
+        $experience->fin  = $request->fin;
+        $experience->cv_id  = $request->cv_id;
+
+        $experience->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $experience->id
+        ]);
     }
 
     

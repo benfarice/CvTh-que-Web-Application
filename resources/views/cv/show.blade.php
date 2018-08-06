@@ -17,7 +17,7 @@
 							</h3>
 						</div>
 						<div class="col-md-2 text-right">
-							<button class="btn btn-success">
+							<button class="btn btn-success" v-on:click="open = true">
 								Ajouter
 							</button>
 						</div>
@@ -28,6 +28,45 @@
 					
 				</div>
 				<div class="panel-body">
+
+					<div v-if="open">
+						<div class="form-group">
+							<label for="titre">Titre</label>
+							<input type="text" placeholder="le Titre" name="" id="titre" class="form-control" v-model="experience.titre">
+						</div>
+
+						<div class="form-group">
+							<label for="contenu">contenu</label>
+							<textarea placeholder="le contenu" name="" id="contenu" class="form-control" v-model="experience.body"></textarea>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="debut">Date debut</label>
+									<input type="date" class="form-control" name="" placeholder="debut" id="debut"
+									v-model="experience.debut">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fin">Date fin</label>
+									<input type="date" class="form-control" name="" placeholder="fin" id="fin" v-model="experience.fin">
+								</div>
+							</div>
+						</div>
+
+						<button class="btn btn-info btn-block" @click="addExperience">
+							Ajouter
+						</button>
+					</div>
+
+
+
+
+
+
+
 					<ul class="list-group">
 
 						<li class="list-group-item" v-for="experience in experiences">
@@ -146,17 +185,61 @@
 <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
 <script type="text/javascript">
+
+
+	window.Laravel = {!! json_encode(
+		[
+			'csrfOken'    => csrf_token(),
+			'IdExperience'=>$id,
+			'url'         => url('/')
+		]
+		) !!};
+
+
+
+
+
 	var app = new Vue({
 		el:'#app',
 		data:{
 			message:'je suis Youssef Imzoughene',
-			experiences:[]
+			experiences:[],
+			open:false,
+			experience:{
+				id:0,
+				cv_id:window.Laravel.IdExperience,
+				titre:'',
+				body:'',
+				debut:'',
+				fin:''
+			}
 		},
 		methods:{
 			getExperiences : function(){
-				axios.get('http://localhost:8000/getexperiences')
+				axios.get(window.Laravel.url+'/getexperiences/'+window.Laravel.IdExperience)
 				.then(response => {
 					this.experiences=response.data;
+					console.log(response.data)
+				})
+				.catch(error => {
+					console.log("error : "+error)
+				})
+			},
+			addExperience : function(){
+				axios.post(window.Laravel.url+'/addexperience',this.experience)
+				.then(response => {
+					if(response.data.etat){
+						this.open = false;
+						this.experiences.push(this.experience);
+						this.experience = {
+							id:0,
+							cv_id:window.Laravel.IdExperience,
+							titre:'',
+							body:'',
+							debut:'',
+							fin:''
+						}
+					}
 					console.log(response.data)
 				})
 				.catch(error => {

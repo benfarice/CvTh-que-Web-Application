@@ -68,4 +68,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 */
 Route::resource('cvs','CvController');
-Route::get('/getexperiences','ExperienceController@getExperiences');
+Route::get('/getexperiences/{id}','CvController@getExperiences');
+Route::post('/addexperience','CvController@addexperience');
