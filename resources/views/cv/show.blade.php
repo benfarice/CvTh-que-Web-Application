@@ -30,51 +30,18 @@
 				<div class="panel-body">
 					<ul class="list-group">
 
-						<li class="list-group-item">
+						<li class="list-group-item" v-for="experience in experiences">
 							<div class="pull-right">
 								<button class="btn btn-warning btn-sm">
 								Editer	
 								</button>
 							</div>
-							<h3>Lorem ipsum dolor sit amet, consectetur </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<small>12/03/2016 - 03/10/2017</small>
+							<h3>@{{experience.titre }}</h3>
+							<p>@{{experience.body}}</p>
+							<small>@{{experience.debut }} - @{{experience.fin }}</small>
 						</li>
-						<li class="list-group-item">
-							<div class="pull-right">
-								<button class="btn btn-warning btn-sm">
-								Editer	
-								</button>
-							</div>
-							<h3>Lorem ipsum dolor sit amet, consectetur </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<small>12/03/2016 - 03/10/2017</small>
-						</li>
-						<li class="list-group-item">
-							<div class="pull-right">
-								<button class="btn btn-warning btn-sm">
-								Editer	
-								</button>
-							</div>
-							<h3>Lorem ipsum dolor sit amet, consectetur </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<small>12/03/2016 - 03/10/2017</small>
-						</li>
+						
+					
 
 					</ul>
 				</div>
@@ -177,11 +144,28 @@
 @section('js_scripts')
 
 <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
 <script type="text/javascript">
 	var app = new Vue({
 		el:'#app',
 		data:{
-			message:'je suis Youssef Imzoughene'
+			message:'je suis Youssef Imzoughene',
+			experiences:[]
+		},
+		methods:{
+			getExperiences : function(){
+				axios.get('http://localhost:8000/getexperiences')
+				.then(response => {
+					this.experiences=response.data;
+					console.log(response.data)
+				})
+				.catch(error => {
+					console.log("error : "+error)
+				})
+			}
+		},
+		mounted:function(){
+			this.getExperiences();
 		}
 	});
 

@@ -59,3 +59,11 @@ php artisan make:policy CvPolicy --model=Cv
 php artisan make:migration add_column_is_admin_users --table=users
 ----
 php artisan migrate
+---
+php artisan make:model Experience
+--
+php artisan make:migration experiences
+---
+php artisan migrate
+----
+php artisan make:migration add_columns_experiences --table=experiences

@@ -100,4 +100,6 @@ class CvController extends Controller
     public function show($id){
         return view('cv.show',['id'=>$id]);
     }
+
+    
 }
