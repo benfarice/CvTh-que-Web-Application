@@ -71,3 +71,5 @@ Route::resource('cvs','CvController');
 Route::get('/getexperiences/{id}','CvController@getExperiences');
 Route::post('/addexperience','CvController@addexperience');
 Route::put('/update_experience','CvController@update_experience');
+
+Route::delete('/deleteExperience/{id}','CvController@deleteExperience');

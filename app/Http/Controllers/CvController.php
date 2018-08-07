@@ -139,4 +139,14 @@ class CvController extends Controller
             'id'   => $experience->id
         ]);
     }
+
+    function deleteExperience(Request $request,$id){
+        $exp = Experience::find($id);
+        $exp->delete();
+        return Response()->json([
+            'etat' => true,
+            
+        ]);
+
+    }
 }

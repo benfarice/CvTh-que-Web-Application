@@ -81,6 +81,10 @@
 								<button class="btn btn-warning btn-sm" @click="editExperience(experience)">
 								Editer	
 								</button>
+
+								<button class="btn btn-danger btn-sm" @click="deleteExperience(experience)">
+								Supprimer	
+								</button>
 							</div>
 							<h3>@{{experience.titre }}</h3>
 							<p>@{{experience.body}}</p>
@@ -280,6 +284,21 @@
 					}
 					console.log(response.data)
 					this.edit = false;
+				})
+				.catch(error => {
+					console.log("error : "+error)
+				})
+			},
+			deleteExperience : function(exp){
+				axios.delete(window.Laravel.url+'/deleteExperience/'+exp.id)
+				.then(response => {
+					if(response.data.etat){
+					
+						var position = this.experiences.indexOf(exp);
+						this.experiences.splice(position,1);
+					}
+					console.log(response.data)
+					
 				})
 				.catch(error => {
 					console.log("error : "+error)
