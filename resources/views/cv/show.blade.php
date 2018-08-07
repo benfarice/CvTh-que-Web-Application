@@ -195,6 +195,8 @@
 
 <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('js/sweetalert2.js')}}"></script>
 <script type="text/javascript">
 
 
@@ -290,19 +292,53 @@
 				})
 			},
 			deleteExperience : function(exp){
-				axios.delete(window.Laravel.url+'/deleteExperience/'+exp.id)
-				.then(response => {
-					if(response.data.etat){
-					
-						var position = this.experiences.indexOf(exp);
-						this.experiences.splice(position,1);
-					}
-					console.log(response.data)
-					
+
+
+
+
+				swal({
+				  title: 'Etes vous ?',
+				  text: "De supprimer cette experience ?",
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Oui, Supprimer!'
+				}).then((result) => {
+				  if (result.value) {
+
+
+				  	axios.delete(window.Laravel.url+'/deleteExperience/'+exp.id)
+					.then(response => {
+						if(response.data.etat){
+						
+							var position = this.experiences.indexOf(exp);
+							this.experiences.splice(position,1);
+						}
+						console.log(response.data)
+						
+					})
+					.catch(error => {
+						console.log("error : "+error)
+					})
+				    swal(
+				      'Deleted!',
+				      'Your file has been deleted.',
+				      'success'
+				    )
+				  }
 				})
-				.catch(error => {
-					console.log("error : "+error)
-				})
+
+
+
+
+
+
+
+
+
+
+				
 			}
 		},
 		mounted:function(){
