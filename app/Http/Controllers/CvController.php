@@ -105,7 +105,7 @@ class CvController extends Controller
 
     public function getexperiences($id){
         $cv =  Cv::find($id);
-        return $cv->experiences;  
+        return $cv->experiences()->orderBy('debut','desc')->get();  
     }
 
     public function addexperience(Request $request){
@@ -124,5 +124,19 @@ class CvController extends Controller
         ]);
     }
 
-    
+    function update_experience(Request $request){
+        $experience = Experience::find($request->id);
+        $experience->titre = $request->titre;
+        $experience->body  = $request->body;
+        $experience->debut = $request->debut;
+        $experience->fin  = $request->fin;
+        $experience->cv_id  = $request->cv_id;
+
+        $experience->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $experience->id
+        ]);
+    }
 }

@@ -56,9 +56,16 @@
 							</div>
 						</div>
 
-						<button class="btn btn-info btn-block" @click="addExperience">
+
+						<button v-if="edit" class="btn btn-danger btn-block" @click="updateExperience">
+							Modifier
+						</button>
+
+						<button v-else class="btn btn-info btn-block" @click="addExperience">
 							Ajouter
 						</button>
+
+						
 					</div>
 
 
@@ -71,7 +78,7 @@
 
 						<li class="list-group-item" v-for="experience in experiences">
 							<div class="pull-right">
-								<button class="btn btn-warning btn-sm">
+								<button class="btn btn-warning btn-sm" @click="editExperience(experience)">
 								Editer	
 								</button>
 							</div>
@@ -212,7 +219,8 @@
 				body:'',
 				debut:'',
 				fin:''
-			}
+			},
+			edit:false
 		},
 		methods:{
 			getExperiences : function(){
@@ -230,6 +238,10 @@
 				.then(response => {
 					if(response.data.etat){
 						this.open = false;
+
+						this.experience.id = response.data.id;
+
+
 						this.experiences.push(this.experience);
 						this.experience = {
 							id:0,
@@ -241,6 +253,33 @@
 						}
 					}
 					console.log(response.data)
+				})
+				.catch(error => {
+					console.log("error : "+error)
+				})
+			},
+			editExperience : function(exp){
+				this.open = true;
+				this.edit = true;
+				this.experience = exp;
+			},
+			updateExperience : function(){
+				axios.put(window.Laravel.url+'/update_experience',this.experience)
+				.then(response => {
+					if(response.data.etat){
+						this.open = false;
+					
+						this.experience = {
+							id:0,
+							cv_id:window.Laravel.IdExperience,
+							titre:'',
+							body:'',
+							debut:'',
+							fin:''
+						}
+					}
+					console.log(response.data)
+					this.edit = false;
 				})
 				.catch(error => {
 					console.log("error : "+error)
