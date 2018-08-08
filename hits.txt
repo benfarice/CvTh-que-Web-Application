@@ -67,3 +67,17 @@ php artisan make:migration experiences
 php artisan migrate
 ----
 php artisan make:migration add_columns_experiences --table=experiences
+-----
+php artisan make:migration formations
+----
+php artisan make:model Formation
+-----
+php artisan make:migration competences
+----
+php artisan make:model Competence
+-----
+php artisan make:migration projets
+----
+php artisan make:model Projet
+---
+php artisan make:migration add_columns_projets --table=projets

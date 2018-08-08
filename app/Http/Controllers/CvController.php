@@ -7,6 +7,10 @@ use Illuminate\Http\UploadedFile;
 
 use App\Cv;
 use App\Experience;
+use App\Formation;
+use App\Competence;
+use App\Projet;
+
 
 use Auth;
 
@@ -103,9 +107,18 @@ class CvController extends Controller
         return view('cv.show',['id'=>$id]);
     }
 
-    public function getexperiences($id){
+    public function getData($id){
         $cv =  Cv::find($id);
-        return $cv->experiences()->orderBy('debut','desc')->get();  
+        return 
+        [
+            $cv->experiences()->orderBy('debut','desc')->get(),
+            $cv->formations()->orderBy('debut','desc')->get(),
+            $cv->projets()->get(),
+            $cv->competences()->get(),
+        ];
+
+
+
     }
 
     public function addexperience(Request $request){
@@ -121,6 +134,55 @@ class CvController extends Controller
         return Response()->json([
             'etat' => true,
             'id'   => $experience->id
+        ]);
+    }
+
+    public function add_formation(Request $request){
+        $f = new Formation;
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+        $f->debut = $request->debut;
+        $f->fin  = $request->fin;
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
+        ]);
+    }
+
+    public function add_competence(Request $request){
+        $f = new Competence;
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+       
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
+        ]);
+    }
+
+    public function add_projet(Request $request){
+        $f = new Projet;
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+
+        $f->lien = $request->lien;
+        $f->image  = $request->image;
+       
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
         ]);
     }
 
@@ -140,6 +202,52 @@ class CvController extends Controller
         ]);
     }
 
+    function update_formation(Request $request){
+        $f = Formation::find($request->id);
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+        $f->debut = $request->debut;
+        $f->fin  = $request->fin;
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
+        ]);
+    }
+
+    function update_competence(Request $request){
+        $f = Competence::find($request->id);
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+      
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
+        ]);
+    }
+
+     function update_projet(Request $request){
+        $f = Projet::find($request->id);
+        $f->titre = $request->titre;
+        $f->body  = $request->body;
+      
+        $f->cv_id  = $request->cv_id;
+
+        $f->save();
+
+        return Response()->json([
+            'etat' => true,
+            'id'   => $f->id
+        ]);
+    }
+
     function deleteExperience(Request $request,$id){
         $exp = Experience::find($id);
         $exp->delete();
@@ -149,4 +257,36 @@ class CvController extends Controller
         ]);
 
     }
+
+     function deleteFormation(Request $request,$id){
+        $exp = Formation::find($id);
+        $exp->delete();
+        return Response()->json([
+            'etat' => true,
+            
+        ]);
+
+    }
+
+     function delete_competence(Request $request,$id){
+        $exp = Competence::find($id);
+        $exp->delete();
+        return Response()->json([
+            'etat' => true,
+            
+        ]);
+
+    }
+
+     function delete_projet(Request $request,$id){
+        $exp = Projet::find($id);
+        $exp->delete();
+        return Response()->json([
+            'etat' => true,
+            
+        ]);
+
+    }
+
+    
 }

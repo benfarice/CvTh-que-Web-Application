@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Experience extends Model
+class Projet extends Model
 {
-    public function cv(){
+     public function cv(){
     	return $this->belongsTo('App\Cv');
     }
 }
