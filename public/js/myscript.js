@@ -429,7 +429,7 @@ var app = new Vue({
 			validateForm(scope){
 				this.$validator.validateAll(scope).then((result)=>{
 					if(result){
-						if(edit.experience==false)
+						if(this.edit.experience==false)
 						this.addExperience();
 					}
 				});

@@ -6,7 +6,7 @@
 <div class="container" id="myapp">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>@{{ message }}</h1>
+			<!-- <h1>@{{ message }}</h1> -->
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 
