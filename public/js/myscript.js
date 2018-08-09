@@ -425,6 +425,14 @@ var app = new Vue({
 				    )
 				  }
 				})		
+			},
+			validateForm(scope){
+				this.$validator.validateAll(scope).then((result)=>{
+					if(result){
+						if(edit.experience==false)
+						this.addExperience();
+					}
+				});
 			}
 		},
 		mounted:function(){

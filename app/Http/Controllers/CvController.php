@@ -174,7 +174,7 @@ class CvController extends Controller
         $f->body  = $request->body;
 
         $f->lien = $request->lien;
-        $f->image  = $request->image;
+        //$f->image  = $request->image;
        
         $f->cv_id  = $request->cv_id;
 

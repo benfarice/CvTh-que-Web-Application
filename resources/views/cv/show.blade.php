@@ -34,14 +34,22 @@
 				<div class="panel-body">
 
 					<div v-if="open.experience">
-						<div class="form-group">
+
+
+						<form @submit.prevent="validateForm('formExperience')"  data-vv-scope="formExperience">
+							
+						
+
+						<div :class="{'form-group':true,'has-error':errors.has('formExperience.titre')}">
 							<label for="titre">Titre</label>
-							<input type="text" placeholder="le Titre" name="" id="titre" class="form-control" v-model="experience.titre">
+							<input type="text"  v-validate="'required'" placeholder="le Titre" name="titre" id="titre" class="form-control" v-model="experience.titre">
+							<label  class="control-label" v-show="errors.has('formExperience.titre')">@{{ errors.first('formExperience.titre')}}</label>
 						</div>
 
 						<div class="form-group">
 							<label for="contenu">contenu</label>
-							<textarea placeholder="le contenu" name="" id="contenu" class="form-control" v-model="experience.body"></textarea>
+							<textarea placeholder="le contenu" v-validate="'required|min:5|max:255'"  name="contenu" id="contenu" class="form-control" v-model="experience.body"></textarea>
+							<span v-show="errors.has('formExperience.contenu')">@{{ errors.first('formExperience.contenu')}}</span>
 						</div>
 
 						<div class="row">
@@ -61,15 +69,16 @@
 						</div>
 
 
-						<button v-if="edit.experience" class="btn btn-danger btn-block" @click="updateExperience">
+						<button type="submit" v-if="edit.experience" class="btn btn-danger btn-block" @click="updateExperience">
 							Modifier
 						</button>
 
-						<button v-else class="btn btn-info btn-block" @click="addExperience">
+						<button v-else class="btn btn-info btn-block">
 							Ajouter
 						</button>
 
-						
+					</form>
+	
 					</div>
 
 
@@ -240,7 +249,7 @@
 								<div class="form-group">
 									<label for="lien">Lien</label>
 									<input type="text" class="form-control" name="" placeholder="Lien" id="lien"
-									v-model="experience.lien">
+									v-model="projet.lien">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -389,10 +398,14 @@
 @section('js_scripts')
 
 <script type="text/javascript" src="{{asset('js/vue.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/vee-validate.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/axios.min.js')}}"></script>
 
 <script type="text/javascript" src="{{asset('js/sweetalert2.js')}}"></script>
 <script type="text/javascript">
+
+	Vue.use(VeeValidate);
+
 	window.Laravel = {!! json_encode(
 		[
 			'csrfOken'    => csrf_token(),
